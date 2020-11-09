@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES" codeGenerationType="class">
+        <attribute name="exerciseDay" optional="YES" attributeType="String"/>
+        <attribute name="exerciseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="exerciseName" optional="YES" attributeType="String"/>
+        <attribute name="exerciseRep" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="exerciseSet" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="exerciseWightType" optional="YES" attributeType="String"/>
+        <attribute name="exersciseWeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="isIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutDays" inverseName="canBe" inverseEntity="WorkoutDays"/>
+    </entity>
+    <entity name="WorkoutDays" representedClassName=".WorkoutDays" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="workoutDay" optional="YES" attributeType="String"/>
+        <attribute name="workoutID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="workoutName" optional="YES" attributeType="String"/>
+        <relationship name="canBe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="isIn" inverseEntity="Exercise"/>
+    </entity>
+    <elements>
+        <element name="Exercise" positionX="252.36328125" positionY="-101.27734375" width="128" height="163"/>
+        <element name="WorkoutDays" positionX="-63" positionY="36" width="128" height="103"/>
+    </elements>
+</model>
