@@ -22,6 +22,7 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
     
     override func viewDidLoad() {
         
+        //here si the new changes
         collectionView.delegate = self
         collectionView.dataSource = self
     }
