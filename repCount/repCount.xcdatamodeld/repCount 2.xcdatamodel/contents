@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Exercise" representedClassName=".Exercise" syncable="YES" codeGenerationType="class">
+    <entity name="Exercise" representedClassName=".Exercise" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="exerciseDay" optional="YES" attributeType="String"/>
         <attribute name="exerciseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="exerciseName" optional="YES" attributeType="String"/>
