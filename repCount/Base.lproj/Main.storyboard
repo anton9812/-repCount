@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ybV-bd-AB4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ybV-bd-AB4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -63,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="AMn-8n-47t" userLabel="mainStack">
                                 <rect key="frame" x="20" y="349" width="374" height="289.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter initial data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ey-nL-6eS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter initial exercise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ey-nL-6eS">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="25.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
@@ -98,8 +98,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fzk-UQ-I3v">
                                         <rect key="frame" x="0.0" y="255.5" width="374" height="34"/>
                                         <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6D-ae-2ll">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                            </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="11c-Bm-ev9">
-                                                <rect key="frame" x="0.0" y="0.0" width="177" height="35"/>
+                                                <rect key="frame" x="197" y="0.0" width="177" height="35"/>
                                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <segments>
                                                     <segment title="KG."/>
@@ -110,11 +115,6 @@
                                                     <action selector="selectWeighttype:" destination="BYZ-38-t0r" eventType="valueChanged" id="iug-9r-fZO"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6D-ae-2ll">
-                                                <rect key="frame" x="197" y="0.0" width="177" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                            </textField>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -319,7 +319,6 @@
                                 <state key="normal" title="Select Day"/>
                                 <connections>
                                     <action selector="addToWorkout:" destination="67v-1X-LzZ" eventType="touchUpInside" id="yGh-6N-cQr"/>
-                                    <segue destination="tdW-W7-Rdl" kind="show" id="aSP-qK-p9E"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -341,6 +340,7 @@
                         <outlet property="AddToWorkout" destination="whG-v6-9Kp" id="Tdb-BM-Z8W"/>
                         <outlet property="addToorkout" destination="whG-v6-9Kp" id="VVL-aw-Yj7"/>
                         <outlet property="tableView" destination="o31-xZ-cPw" id="9Xq-7t-YR8"/>
+                        <segue destination="JwP-9h-eoI" kind="show" identifier="toDaysSelect" id="7nf-Ze-drk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FFK-Ly-JBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -355,7 +355,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tPl-Cr-RzV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tPl-Cr-RzV">
                                 <rect key="frame" x="0.0" y="132" width="414" height="570"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -397,27 +397,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-JZ-1f6">
-                                <rect key="frame" x="118" y="733" width="179" height="30"/>
-                                <state key="normal" title="Select Workout"/>
-                                <connections>
-                                    <segue destination="JwP-9h-eoI" kind="show" id="mgc-zT-aNw"/>
-                                </connections>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-JZ-1f6">
+                                <rect key="frame" x="122" y="737" width="170" height="30"/>
+                                <state key="normal" title="Select Day"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g5l-oU-Ie8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IEN-JZ-1f6" firstAttribute="leading" secondItem="g5l-oU-Ie8" secondAttribute="leading" constant="118" id="64Q-r6-bJo"/>
+                            <constraint firstItem="IEN-JZ-1f6" firstAttribute="leading" secondItem="g5l-oU-Ie8" secondAttribute="leading" constant="122" id="2Bh-iQ-1Cq"/>
                             <constraint firstItem="tPl-Cr-RzV" firstAttribute="leading" secondItem="g5l-oU-Ie8" secondAttribute="leading" id="BI9-rS-e1u"/>
+                            <constraint firstItem="g5l-oU-Ie8" firstAttribute="trailing" secondItem="IEN-JZ-1f6" secondAttribute="trailing" constant="122" id="DJ5-Bl-Mbn"/>
                             <constraint firstItem="tPl-Cr-RzV" firstAttribute="top" secondItem="g5l-oU-Ie8" secondAttribute="top" id="Jd1-b8-1ET"/>
-                            <constraint firstItem="IEN-JZ-1f6" firstAttribute="top" secondItem="tPl-Cr-RzV" secondAttribute="bottom" constant="31" id="KkU-Gh-yBR"/>
-                            <constraint firstItem="IEN-JZ-1f6" firstAttribute="centerX" secondItem="tPl-Cr-RzV" secondAttribute="centerX" id="O8W-zW-y66"/>
                             <constraint firstItem="tPl-Cr-RzV" firstAttribute="trailing" secondItem="g5l-oU-Ie8" secondAttribute="trailing" id="dmc-Yy-04i"/>
                             <constraint firstItem="g5l-oU-Ie8" firstAttribute="bottom" secondItem="tPl-Cr-RzV" secondAttribute="bottom" constant="111" id="kui-S8-JrT"/>
+                            <constraint firstItem="IEN-JZ-1f6" firstAttribute="top" secondItem="tPl-Cr-RzV" secondAttribute="bottom" constant="35" id="web-3K-b1Q"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bD8-CE-JGK"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="tPl-Cr-RzV" id="2Ym-hg-VCW"/>
@@ -425,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgr-PY-sJx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686.9565217391305" y="-645.53571428571422"/>
+            <point key="canvasLocation" x="2376.811594202899" y="-664.28571428571422"/>
         </scene>
         <!--Select Workout View Controller-->
         <scene sceneID="Eg4-pc-zmN">
@@ -435,8 +433,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ms9-Ts-DQb">
-                                <rect key="frame" x="0.0" y="142" width="414" height="489"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ms9-Ts-DQb">
+                                <rect key="frame" x="0.0" y="118" width="414" height="561"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RLd-0N-hdt">
                                     <size key="itemSize" width="128" height="128"/>
@@ -472,31 +470,45 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-ji-nS7">
+                                <rect key="frame" x="121" y="717" width="172" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="myj-el-y1m"/>
+                                </constraints>
+                                <state key="normal" title="Select Workout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addToWorkout:" destination="67v-1X-LzZ" eventType="touchUpInside" id="k8O-BD-euj"/>
+                                    <action selector="selectWorkoutTapped:" destination="JwP-9h-eoI" eventType="touchUpInside" id="xr1-pI-2nq"/>
+                                    <segue destination="tdW-W7-Rdl" kind="show" id="9WI-EQ-zQ6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="moB-0l-gAg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ms9-Ts-DQb" firstAttribute="top" secondItem="moB-0l-gAg" secondAttribute="top" constant="10" id="5jw-JQ-zYG"/>
-                            <constraint firstItem="moB-0l-gAg" firstAttribute="bottom" secondItem="ms9-Ts-DQb" secondAttribute="bottom" constant="182" id="I4o-1G-IKY"/>
+                            <constraint firstItem="ms9-Ts-DQb" firstAttribute="top" secondItem="moB-0l-gAg" secondAttribute="top" constant="30" id="5jw-JQ-zYG"/>
+                            <constraint firstItem="moB-0l-gAg" firstAttribute="bottom" secondItem="ykz-ji-nS7" secondAttribute="bottom" constant="46" id="UlP-ll-Mrb"/>
+                            <constraint firstItem="ykz-ji-nS7" firstAttribute="leading" secondItem="moB-0l-gAg" secondAttribute="leading" constant="121" id="ZyL-oZ-SGU"/>
+                            <constraint firstItem="ykz-ji-nS7" firstAttribute="centerX" secondItem="ms9-Ts-DQb" secondAttribute="centerX" id="fjt-1t-vX9"/>
+                            <constraint firstItem="ykz-ji-nS7" firstAttribute="top" secondItem="ms9-Ts-DQb" secondAttribute="bottom" constant="38" id="myQ-RC-1m8"/>
                             <constraint firstItem="ms9-Ts-DQb" firstAttribute="leading" secondItem="moB-0l-gAg" secondAttribute="leading" id="nGJ-Tg-ZBs"/>
                             <constraint firstItem="moB-0l-gAg" firstAttribute="trailing" secondItem="ms9-Ts-DQb" secondAttribute="trailing" id="xUh-RN-2xF"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="qp0-FW-JSs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="e0E-VZ-OT4">
-                            <connections>
-                                <segue destination="mBR-jr-Nbq" kind="show" id="GR1-gY-wvW"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="e0E-VZ-OT4"/>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="ms9-Ts-DQb" id="qU0-Pv-vhw"/>
+                        <outlet property="selectWorkoutButton" destination="ykz-ji-nS7" id="3Bv-Bw-TWn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGf-k5-skp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2511.594202898551" y="-663.61607142857144"/>
+            <point key="canvasLocation" x="1655" y="-664"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Mvg-CA-LQz">
@@ -522,7 +534,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="iHJ-PD-JMY">
-                                <rect key="frame" x="0.0" y="44" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="762"/>
                                 <color key="separatorColor" red="0.4039215686" green="0.4823529412" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" rowHeight="60" id="4Pm-yA-EFT" customClass="daysCell" customModule="repCount" customModuleProvider="target">

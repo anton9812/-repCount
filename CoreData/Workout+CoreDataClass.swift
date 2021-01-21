@@ -1,15 +1,15 @@
 //
 //  Workout+CoreDataClass.swift
-//  
+//  repCount
 //
-//  Created by Anton Samuilov on 04/11/2020.
+//  Created by Anton Samuilov on 21/01/2021.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(Workout)
+
 public class Workout: NSManagedObject {
 
 }

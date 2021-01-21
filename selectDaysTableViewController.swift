@@ -14,7 +14,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    var selectedExercise : UUID?
+    var selectedExercise : [Exercise] = []
     let days = ["Monday" , "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var rowsWhichAreChecked = [NSIndexPath]()
     override func viewDidLoad() {
@@ -60,7 +60,10 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         cell.cellBackground.layer.shadowOpacity = 0.4
         cell.cellBackground.layer.shadowRadius = 3
         cell.cellBackground.layer.shadowOffset = CGSize(width: 1.0,height: 1.0)
-        cell.cellBackground.layer.cornerRadius = 2
+        cell.cellBackground.layer.cornerRadius = 10
+       // cell.cellView.layer.borderColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1).cgColor
+        cell.cellBackground.layer.borderWidth = 0
+        
        // cell.cellView.layer.borderColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1).cgColor
         cell.cellBackground.layer.borderWidth = 0
         
@@ -103,22 +106,28 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         let cell:daysCellSelect = tableView.cellForRow(at: indexPath) as! daysCellSelect
         //cell.tickButton.isHidden = false
         
-        
         cell.cellBackground.backgroundColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1)
         cell.label.textColor = .white
-      
+        
         cell.cellBackground.layer.borderColor = UIColor.white.cgColor
         cell.cellBackground.layer.borderWidth = 0.7
         
         
+//        cell.cellBackground.backgroundColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1)
+//        cell.label.textColor = .white
+//
+//        cell.cellBackground.layer.borderColor = UIColor.white.cgColor
+//        cell.cellBackground.layer.borderWidth = 0.7
         
         
         
+        
+        for exercice in selectedExercise{
         
         do{
                             let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Exercise")
                                 fetchReq.returnsObjectsAsFaults = false
-            fetchReq.predicate = NSPredicate(format:"exerciseID = %@", selectedExercise! as CVarArg)
+            fetchReq.predicate = NSPredicate(format:"exerciseID = %@", exercice.exerciseID! as CVarArg)
                                 do {
                                     let obj = try context.fetch(fetchReq) as!  [Exercise]
 
@@ -137,6 +146,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
 
                                 }
                 }
+        }
         
 }
 

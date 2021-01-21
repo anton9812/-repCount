@@ -18,7 +18,7 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var tebleViewView: UIView!
     var selectedDay: String!
-    var selectedExersise : Exercise!
+    var selectedExersise : [Exercise] = []
     var test : [Workout]?
     
     @IBOutlet weak var addToorkout: UIButton!
@@ -44,6 +44,7 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
         fetchExersice ()
         observers()
         Utilities.styleFilledButton(AddToWorkout)
+        selectedExersise.removeAll()
         
         
         
@@ -126,8 +127,10 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
         
         //add to array to be passed
       
-       
-        selectedExersise = items![indexPath.item]
+       let selected = items![indexPath.item]
+
+        
+        selectedExersise.append(selected)
       
       
         
@@ -156,13 +159,9 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? selectDaysTableViewController else {return}
-       //                                                let index = tableView.indexPathForSelectedRow?.row
-        
-        if selectedExersise != nil {
-            vc.selectedExercise = selectedExersise.exerciseID
-        }
-        
+     
+                guard let vc = segue.destination as? selectDaysTableViewController else {return}
+                vc.selectedExercise = selectedExersise
     }
     
         
@@ -257,6 +256,14 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
     
     
     @IBAction func addToWorkout(_ sender: Any) {
+        if selectedExersise.count == 0 {
+            let alert = UIAlertController(title: "No selection", message: "Please select at least one exercise", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            //performSegue(withIdentifier: "toDaysSelect", sender: nil)
+        }else{
+            performSegue(withIdentifier: "toDaysSelect", sender: nil)
+        }
         
         
 //        do{

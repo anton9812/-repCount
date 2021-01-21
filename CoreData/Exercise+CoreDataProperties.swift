@@ -1,8 +1,8 @@
 //
 //  Exercise+CoreDataProperties.swift
-//  
+//  repCount
 //
-//  Created by Anton Samuilov on 11/11/2020.
+//  Created by Anton Samuilov on 21/01/2021.
 //
 //
 
@@ -23,23 +23,10 @@ extension Exercise {
     @NSManaged public var exerciseSet: Int64
     @NSManaged public var exerciseWeight: Int64
     @NSManaged public var exerciseWeightType: String?
-    @NSManaged public var isIn: NSSet?
+    @NSManaged public var isIn: Workout?
 
 }
 
-// MARK: Generated accessors for isIn
-extension Exercise {
-
-    @objc(addIsInObject:)
-    @NSManaged public func addToIsIn(_ value: Workout)
-
-    @objc(removeIsInObject:)
-    @NSManaged public func removeFromIsIn(_ value: Workout)
-
-    @objc(addIsIn:)
-    @NSManaged public func addToIsIn(_ values: NSSet)
-
-    @objc(removeIsIn:)
-    @NSManaged public func removeFromIsIn(_ values: NSSet)
+extension Exercise : Identifiable {
 
 }

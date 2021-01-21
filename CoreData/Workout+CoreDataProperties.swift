@@ -1,8 +1,8 @@
 //
 //  Workout+CoreDataProperties.swift
-//  
+//  repCount
 //
-//  Created by Anton Samuilov on 11/11/2020.
+//  Created by Anton Samuilov on 21/01/2021.
 //
 //
 
@@ -37,5 +37,9 @@ extension Workout {
 
     @objc(removeCanBe:)
     @NSManaged public func removeFromCanBe(_ values: NSSet)
+
+}
+
+extension Workout : Identifiable {
 
 }

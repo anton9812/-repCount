@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Exercise" representedClassName=".Exercise" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
         <attribute name="exerciseDay" optional="YES" attributeType="String"/>
         <attribute name="exerciseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="exerciseName" optional="YES" attributeType="String"/>
@@ -8,16 +8,16 @@
         <attribute name="exerciseSet" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exerciseWeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exerciseWeightType" optional="YES" attributeType="String"/>
-        <relationship name="isIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Workout" inverseName="canBe" inverseEntity="Workout"/>
+        <relationship name="isIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="canBe" inverseEntity="Workout"/>
     </entity>
-    <entity name="Workout" representedClassName=".Workout" syncable="YES" codeGenerationType="class">
+    <entity name="Workout" representedClassName=".Workout" syncable="YES">
         <attribute name="workoutDay" optional="YES" attributeType="String"/>
         <attribute name="workoutID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="workoutName" optional="YES" attributeType="String"/>
-        <relationship name="canBe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="isIn" inverseEntity="Exercise"/>
+        <relationship name="canBe" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Exercise" inverseName="isIn" inverseEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="266.01953125" positionY="-134.6796875" width="128" height="163"/>
-        <element name="Workout" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Exercise" positionX="266.01953125" positionY="-134.6796875" width="128" height="149"/>
+        <element name="Workout" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

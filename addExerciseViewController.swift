@@ -114,10 +114,10 @@ class addExerciseViewController: UIViewController, UITextFieldDelegate {
         default:
             break;
         }
-        print(weightType)
+        //print(weightType)
         
         let id = UUID.init()
-        print(id)
+        //print(id)
         let newExersise = Exercise(context: self.context)
         newExersise.exerciseName = exerciseName.text
         let weight = Int(weightTextfield.text ?? "na")

@@ -10,25 +10,22 @@ import UIKit
 class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
 
     
+    @IBOutlet weak var selectWorkoutButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
     let reuseIdentifier = "workoutCellDisplay" // also enter this string as the cell identifier in the storyboard
-        var items = ["Legs", "Push", "Pull", "Hyp", "Upper Body"]
-        
-        
-        // MARK: - UICollectionViewDataSource protocol
-        
-        // tell the collection view how many cells to make
-    
+        var items = ["Legs", "Push", "Pull", "Hyp", "Upper Body", "Full body"]
+            
     override func viewDidLoad() {
+        Utilities.styleFilledButton(selectWorkoutButton)
         
-        //here si the new changes
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.allowsMultipleSelection = true
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-                // In this function is the code you must implement to your code project if you want to change size of Collection view
+                
         let width  = (view.frame.width-40)
                 return CGSize(width: width, height: 50.0)
         }
@@ -60,6 +57,9 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
             return cell
         }
     
+    
+    
+    
         
         // MARK: - UICollectionViewDelegate protocol
         
@@ -74,4 +74,14 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
 //            cell.label.textColor = .white
             print("You selected cell #\(indexPath.item + 1)!")
         }
+    
+    
+    
+    @IBAction func selectWorkoutTapped(_ sender: Any) {
+        
+        
+        
+        
+    }
+    
     }
