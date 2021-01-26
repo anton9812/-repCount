@@ -13,19 +13,25 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var workout : [Workout] = []
+    var workoutTest : [Workout] = []
+    
+    var selectedDay : String = ""
 
-    var selectedExercise : [Exercise] = []
+    //var selectedExercise : [Exercise] = []
     let days = ["Monday" , "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var rowsWhichAreChecked = [NSIndexPath]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //fetchExersice ()
         tableView.dataSource = self
         tableView.delegate = self
         //tableView.layer.borderWidth = 0.3
         tableView.layer.borderColor = UIColor.black.cgColor
         tableView.backgroundColor = .white
-        
+        tableView.allowsSelection = true
+        tableView.isUserInteractionEnabled = true
+        //deleteAllData()
         
 
        
@@ -35,6 +41,57 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    
+    func deleteAllData() {
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Exercise")
+
+        // Configure Fetch Request
+        fetchRequest.includesPropertyValues = false
+
+        do {
+            let items = try context.fetch(fetchRequest) as! [NSManagedObject]
+
+            for item in items {
+                context.delete(item)
+            }
+
+            // Save Changes
+            try context.save()
+
+        } catch {
+            // Error Handling
+            // ...
+        }
+    }
+    
+    @objc  func fetchExersice () {
+        do {
+            self.workout = try context.fetch(Workout.fetchRequest())
+            DispatchQueue.main.async {
+                //print(self.workout)
+                
+            }
+        }
+        catch{
+             
+        }
+    }
+    @objc  func fetchExersiceTEST () {
+        do {
+            self.workoutTest = try context.fetch(Workout.fetchRequest())
+            DispatchQueue.main.async {
+                for test in self.workoutTest{
+                       print(test.workoutName ?? "non",test.canBe ?? "nil")
+                }
+                
+            }
+        }
+        catch{
+             
+        }
     }
 
     // MARK: - Table view data source
@@ -75,17 +132,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         
         return cell
     }
-//    @objc func checked(sender:UIButton){
-//        if sender.isSelected {
-//            sender.isSelected = false
-//        }
-//        else{
-//            sender.isSelected = true
-//
-//        }
-//        tableView.reloadData()
-//
-//    }
+
      func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         let cell:daysCellSelect = tableView.cellForRow(at: indexPath) as! daysCellSelect
@@ -101,6 +148,8 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
       
         cell.backgroundColor = .white
     }
+    
+    
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell:daysCellSelect = tableView.cellForRow(at: indexPath) as! daysCellSelect
@@ -112,6 +161,44 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         cell.cellBackground.layer.borderColor = UIColor.white.cgColor
         cell.cellBackground.layer.borderWidth = 0.7
         
+        selectedDay = days[indexPath.item]
+        
+        
+//        for workout in workout{
+//            workout.workoutDay = days[indexPath.item]
+//        }
+//        do {
+//            try self.context.save()
+//        }
+//        catch {
+//            print("error saving data")
+//
+//        }
+     }
+        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc  = segue.destination as? selectWorkoutViewController else {return}
+        
+        vc.selectedDays = selectedDay 
+    }
+        
+    @IBAction func selectDayButtonPressed(_ sender: Any) {
+        //fetchExersiceTEST ()
+        
+        if selectedDay == "" {
+            let alert = UIAlertController(title: "No selection", message: "Please select at least one day", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            //performSegue(withIdentifier: "toDaysSelect", sender: nil)
+        }else{
+            performSegue(withIdentifier: "toSelectWorkout", sender: nil)
+        }
+        
+    }
+    
+        
+        
+        
         
 //        cell.cellBackground.backgroundColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1)
 //        cell.label.textColor = .white
@@ -122,32 +209,32 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         
         
         
-        for exercice in selectedExercise{
+//        for exercice in selectedExercise{
+//
+//        do{
+//                            let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Exercise")
+//                                fetchReq.returnsObjectsAsFaults = false
+//            fetchReq.predicate = NSPredicate(format:"exerciseID = %@", exercice.exerciseID! as CVarArg)
+//                                do {
+//                                    let obj = try context.fetch(fetchReq) as!  [Exercise]
+//
+//                                    for details in obj {
+//                                        print(details)
+//                                        //details.addToIsIn(<#T##value: Workout##Workout#>)
+//
+//
+//                                        //details.exerciseDay = selectedDay ?? "Monday"
+//
+//                                        //array.append(details)
+//                                    }
+//
+//                                } catch {
+//                                    print("Error in Fetching")
+//
+//                                }
+//                }
+//        }
         
-        do{
-                            let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Exercise")
-                                fetchReq.returnsObjectsAsFaults = false
-            fetchReq.predicate = NSPredicate(format:"exerciseID = %@", exercice.exerciseID! as CVarArg)
-                                do {
-                                    let obj = try context.fetch(fetchReq) as!  [Exercise]
 
-                                    for details in obj {
-                                        print(details)
-                                        //details.addToIsIn(<#T##value: Workout##Workout#>)
-
-
-                                        //details.exerciseDay = selectedDay ?? "Monday"
-
-                                        //array.append(details)
-                                    }
-
-                                } catch {
-                                    print("Error in Fetching")
-
-                                }
-                }
-        }
-        
-}
 
 }

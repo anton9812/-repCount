@@ -20,6 +20,9 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
     var selectedDay: String!
     var selectedExersise : [Exercise] = []
     var test : [Workout]?
+    var workoutToReceive : Workout?
+    var workoutTest : [Workout] = []
+
     
     @IBOutlet weak var addToorkout: UIButton!
     @IBOutlet weak var AddToWorkout: UIButton!
@@ -46,19 +49,9 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
         Utilities.styleFilledButton(AddToWorkout)
         selectedExersise.removeAll()
         
-        
-        
-//        tableView.layer.shadowColor = UIColor.gray.cgColor
-//        tableView.layer.shadowOpacity = 1
-//        tableView.layer.shadowRadius = 3
-//        tableView.layer.shadowOffset = CGSize(width: 1.0,height: 1.0)
-//        tableView.layer.cornerRadius = 10
-//        tableView.layer.borderColor = UIColor.black.cgColor
-//        tableView.layer.borderWidth = 0.2
-        
-        
-        
         tableView.allowsSelection = true
+        //deleteAllData("Workout")
+        //deleteAllData("Exercise")
         
         
         
@@ -66,9 +59,34 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
 
         // Do any additional setup after loading the view.
     }
-    @objc func addTapped(){
-        
+    
+    func deleteAllData(_ entity:String) {
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Workout")
+
+        // Configure Fetch Request
+        fetchRequest.includesPropertyValues = false
+
+        do {
+            let items = try context.fetch(fetchRequest) as! [NSManagedObject]
+
+            for item in items {
+                context.delete(item)
+            }
+
+            // Save Changes
+            try context.save()
+
+        } catch {
+            // Error Handling
+            // ...
+        }
     }
+
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         setupTransparentNavigationBarWithWhiteText()
     }
@@ -160,8 +178,8 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      
-                guard let vc = segue.destination as? selectDaysTableViewController else {return}
-                vc.selectedExercise = selectedExersise
+                //guard let vc = segue.destination as? selectWorkoutViewController else {return}
+                //vc.selectedExercise = selectedExersise
     }
     
         
@@ -262,7 +280,36 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
             self.present(alert, animated: true, completion: nil)
             //performSegue(withIdentifier: "toDaysSelect", sender: nil)
         }else{
-            performSegue(withIdentifier: "toDaysSelect", sender: nil)
+           
+            for exercise in selectedExersise{
+                //exercise.exerciseDay = workoutToReceive?.workoutDay
+                exercise.isIn = workoutToReceive
+                
+            }
+            do {
+                try self.context.save()
+                print("Data is saved")
+                fetchExersice1 ()
+            }
+            catch{
+                print("DAta not saved")
+            }
+            
+        }
+    }
+ func fetchExersice1 () {
+        do {
+                self.workoutTest = try context.fetch(Workout.fetchRequest())
+                DispatchQueue.main.async {
+                    for workout in self.workoutTest{
+                        print(workout.canBe!)
+                    }
+                    
+                }
+            }
+            catch{
+                 
+            }
         }
         
         
@@ -288,7 +335,7 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
 //                        }
 //        }
     }
-}
+
 extension addToworkoutViewController : UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
