@@ -11,16 +11,18 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
     
     var selectedExercise : [Exercise] = []
     var workoutTest : [Workout] = []
+    var selectWorkType : String = ""
     
     var selectedDays : String?
     var workoutToPass : Workout?
+    var count : Int = 0
     @IBOutlet weak var selectWorkoutButton: UIButton!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var collectionView: UICollectionView!
     let reuseIdentifier = "workoutCellDisplay" // also enter this string as the cell identifier in the storyboard
-    var items = ["Legs", "Push", "Pull", "Hyp", "Upper Body", "Full body"]
-    
+    var workoutType = ["Legs", "Push", "Pull", "Hyp", "Upper Body", "Full body"]
+    //var daySelected : String = ""
     
     
     
@@ -29,7 +31,8 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
         // deleteAllData()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.allowsMultipleSelection = true
+        //collectionView.allowsMultipleSelection = true
+        collectionView.allowsMultipleSelection = false
         
         
         
@@ -50,7 +53,7 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items.count
+        return self.workoutType.count
     }
     
     // make a cell for each cell index path
@@ -60,7 +63,7 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! workoutCollectionViewCell
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        cell.label.text = self.items[indexPath.row]
+        cell.label.text = self.workoutType[indexPath.row]
         cell.label.textColor = .black
         cell.layer.cornerRadius = 10
         
@@ -85,34 +88,19 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
         // selectedDays.append(items[indexPath.item])
         
         
+        selectWorkType = workoutType[indexPath.row]
         
-        
-        let newWorkout = Workout(context: self.context)
-        
-      
-        newWorkout.workoutID = UUID()
-        
-        
-        newWorkout.workoutName = items[indexPath.item]
-        newWorkout.workoutDay = selectedDays
-        workoutToPass = newWorkout
-        
-        do {
-            try self.context.save()
-            print("Data is saved")
-            //fetchExersice1 ()
-        }
-        catch{
-            print("DAta not saved")
-        }
-        
+       
         
         
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc1 = segue.destination as? addToworkoutViewController else {return}
         
-        vc1.workoutToReceive = workoutToPass
+        //vc1.workoutToReceive = workoutToPass
+        vc1.day = selectedDays!
+        vc1.name = selectWorkType
     }
     
     
@@ -120,7 +108,7 @@ class selectWorkoutViewController: UIViewController, UICollectionViewDelegate,UI
     @IBAction func selectWorkoutTapped(_ sender: Any) {
         
         //fetchExersice ()
-        if workoutToPass == nil {
+        if selectWorkType == "" {
             let alert = UIAlertController(title: "No selection", message: "Please select at least one Workout", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

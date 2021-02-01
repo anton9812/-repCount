@@ -14,10 +14,10 @@
         <attribute name="workoutDay" optional="YES" attributeType="String"/>
         <attribute name="workoutID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="workoutName" optional="YES" attributeType="String"/>
-        <relationship name="canBe" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Exercise" inverseName="isIn" inverseEntity="Exercise"/>
+        <relationship name="canBe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="isIn" inverseEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="266.01953125" positionY="-134.6796875" width="128" height="149"/>
-        <element name="Workout" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Exercise" positionX="266.01953125" positionY="-134.6796875" width="128" height="163"/>
+        <element name="Workout" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

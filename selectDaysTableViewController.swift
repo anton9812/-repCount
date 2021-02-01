@@ -46,7 +46,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
     
     func deleteAllData() {
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Exercise")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Workout")
 
         // Configure Fetch Request
         fetchRequest.includesPropertyValues = false
@@ -161,7 +161,8 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         cell.cellBackground.layer.borderColor = UIColor.white.cgColor
         cell.cellBackground.layer.borderWidth = 0.7
         
-        selectedDay = days[indexPath.item]
+        selectedDay = days[indexPath.row]
+        //print(selectedDay)
         
         
 //        for workout in workout{
