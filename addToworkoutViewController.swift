@@ -162,7 +162,8 @@ class addToworkoutViewController: UIViewController, UITableViewDelegate, UITable
         newWorkout.workoutID = UUID()
         newWorkout.workoutName = name
         newWorkout.workoutDay = day
-        newWorkout.addToCanBe(selected)
+        //selected.isIn = newWorkout
+        selected.addToIsIn(newWorkout)
         //newWorkout.addToCanBe(<#T##value: Exercise##Exercise#>)
         //workoutToPass = newWorkout
         do {

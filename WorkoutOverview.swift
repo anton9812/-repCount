@@ -59,6 +59,7 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
        // navigationController?.popToRootViewController(animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+        workoutTwoDimentions = [[],[],[],[],[],[],[]]
         fetchData()
     }
   
@@ -141,7 +142,14 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
         
         
         cell.lable.text = workout.workoutName
-    
+        let b  = workout.has as! Set<Exercise>
+        if b.count != 0 {
+            for i in b{
+                cell.label2.text = i.exerciseName ?? "No exercise"
+                //print(i.exerciseName ?? "NON")
+            }
+        }
+        //cell.label2.text = workout.has
         
         return cell
     }

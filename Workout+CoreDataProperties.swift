@@ -2,7 +2,7 @@
 //  Workout+CoreDataProperties.swift
 //  repCount
 //
-//  Created by Anton Samuilov on 28/01/2021.
+//  Created by Anton Samuilov on 09/02/2021.
 //
 //
 
@@ -19,24 +19,24 @@ extension Workout {
     @NSManaged public var workoutDay: String?
     @NSManaged public var workoutID: UUID?
     @NSManaged public var workoutName: String?
-    @NSManaged public var canBe: NSSet?
+    @NSManaged public var has: NSSet?
 
 }
 
-// MARK: Generated accessors for canBe
+// MARK: Generated accessors for has
 extension Workout {
 
-    @objc(addCanBeObject:)
-    @NSManaged public func addToCanBe(_ value: Exercise)
+    @objc(addHasObject:)
+    @NSManaged public func addToHas(_ value: Exercise)
 
-    @objc(removeCanBeObject:)
-    @NSManaged public func removeFromCanBe(_ value: Exercise)
+    @objc(removeHasObject:)
+    @NSManaged public func removeFromHas(_ value: Exercise)
 
-    @objc(addCanBe:)
-    @NSManaged public func addToCanBe(_ values: NSSet)
+    @objc(addHas:)
+    @NSManaged public func addToHas(_ values: NSSet)
 
-    @objc(removeCanBe:)
-    @NSManaged public func removeFromCanBe(_ values: NSSet)
+    @objc(removeHas:)
+    @NSManaged public func removeFromHas(_ values: NSSet)
 
 }
 

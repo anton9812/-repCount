@@ -31,6 +31,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
         tableView.backgroundColor = .white
         tableView.allowsSelection = true
         tableView.isUserInteractionEnabled = true
+        //
         //deleteAllData()
         
 
@@ -84,7 +85,7 @@ class selectDaysTableViewController: UIViewController, UITableViewDelegate, UITa
             self.workoutTest = try context.fetch(Workout.fetchRequest())
             DispatchQueue.main.async {
                 for test in self.workoutTest{
-                       print(test.workoutName ?? "non",test.canBe ?? "nil")
+                       //print(test.workoutName ?? "non",test.canBe ?? "nil")
                 }
                 
             }
