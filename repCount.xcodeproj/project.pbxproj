@@ -30,6 +30,7 @@
 		B5DAB109255C14DB006320EF /* daysCellSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DAB108255C14DA006320EF /* daysCellSelect.swift */; };
 		B5E09B102559CB5600A58875 /* repCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5E09B0E2559CB5600A58875 /* repCount.xcdatamodeld */; };
 		B5E9F24725434D4F00F86A99 /* WorkoutOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9F24625434D4F00F86A99 /* WorkoutOverview.swift */; };
+		B5F317B925FF65BC00F62357 /* add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F317B825FF65BC00F62357 /* add.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		B5DAB108255C14DA006320EF /* daysCellSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daysCellSelect.swift; sourceTree = "<group>"; };
 		B5E09B0F2559CB5600A58875 /* repCount.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = repCount.xcdatamodel; sourceTree = "<group>"; };
 		B5E9F24625434D4F00F86A99 /* WorkoutOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutOverview.swift; sourceTree = "<group>"; };
+		B5F317B825FF65BC00F62357 /* add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = add.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		B571C921253DF88500846561 = {
 			isa = PBXGroup;
 			children = (
+				B5F317B825FF65BC00F62357 /* add.swift */,
 				B5544CE225D2D72000429076 /* Exercise+CoreDataClass.swift */,
 				B5544CE325D2D72000429076 /* Exercise+CoreDataProperties.swift */,
 				B5544CE425D2D72000429076 /* Workout+CoreDataClass.swift */,
@@ -317,6 +320,7 @@
 				B57A83A3253F29BA00C3387A /* Utilities.swift in Sources */,
 				B5DAB109255C14DB006320EF /* daysCellSelect.swift in Sources */,
 				B58A51E02564767700397E1F /* selectWorkoutViewController.swift in Sources */,
+				B5F317B925FF65BC00F62357 /* add.swift in Sources */,
 				B5E09B102559CB5600A58875 /* repCount.xcdatamodeld in Sources */,
 				B5544CE725D2D72000429076 /* Exercise+CoreDataProperties.swift in Sources */,
 				B571C930253DF88500846561 /* SceneDelegate.swift in Sources */,
