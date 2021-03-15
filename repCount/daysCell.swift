@@ -8,7 +8,9 @@
 import UIKit
 
 class daysCell: UITableViewCell {
-    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var exerciseName: UILabel!
+    @IBOutlet weak var exerciseReps: UILabel!
+    @IBOutlet weak var exerciseSets: UILabel!
     
     @IBOutlet weak var lable: UILabel!
     override func awakeFromNib() {

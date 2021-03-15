@@ -21,7 +21,7 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
     
     
     @IBOutlet weak var refresh: UIButton!
-    
+    private var corner: CGFloat = 10.0
     
     //var exersiseArray : Exercise?
     var sda : String = ""
@@ -43,7 +43,7 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.backgroundColor = UIColor.clear
+        self.tableView.backgroundColor = UIColor.lightGray
         tableView.contentInsetAdjustmentBehavior = .never
         
         
@@ -52,17 +52,17 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     //
     
-//
+    //
     @IBAction func refreshbtn(_ sender: Any) {
         //fetchData()
         self.tableView.reloadData()
-       // navigationController?.popToRootViewController(animated: true)
+        // navigationController?.popToRootViewController(animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
         workoutTwoDimentions = [[],[],[],[],[],[],[]]
         fetchData()
     }
-  
+    
     
     func fetchData(){
         workoutArray.removeAll()
@@ -70,46 +70,46 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
             self.workoutArray = try context.fetch(Workout.fetchRequest())
             print ("workout amount \(workoutArray.count)")
             //DispatchQueue.main.async {
+            
+            for workout in self.workoutArray {
+                if workout.workoutDay == "Monday" {
+                    self.workoutTwoDimentions[0].append(workout)
+                }else
+                if workout.workoutDay == "Tuesday" {
+                    
+                    self.workoutTwoDimentions[1].append(workout)
+                }else
                 
-                for workout in self.workoutArray {
-                    if workout.workoutDay == "Monday" {
-                        self.workoutTwoDimentions[0].append(workout)
-                    }else
-                    if workout.workoutDay == "Tuesday" {
-                        
-                        self.workoutTwoDimentions[1].append(workout)
-                    }else
+                if workout.workoutDay == "Wednesday" {
                     
-                    if workout.workoutDay == "Wednesday" {
-                        
-                        self.workoutTwoDimentions[2].append(workout)
-                    }else
+                    self.workoutTwoDimentions[2].append(workout)
+                }else
                 
-                    if workout.workoutDay == "Thursday" {
-                        
-                        self.workoutTwoDimentions[3].append(workout)
-                    }else
+                if workout.workoutDay == "Thursday" {
                     
-                    if workout.workoutDay == "Friday" {
-                        
-                        self.workoutTwoDimentions[4].append(workout)
-                    }else
+                    self.workoutTwoDimentions[3].append(workout)
+                }else
+                
+                if workout.workoutDay == "Friday" {
                     
-                    if workout.workoutDay == "Saturday" {
-                        
-                        self.workoutTwoDimentions[5].append(workout)
-                                  }
-                    else
-                    if workout.workoutDay == "Sunday" {
-                        
-                        self.workoutTwoDimentions[6].append(workout)
-                        
-                    }
-               // }
+                    self.workoutTwoDimentions[4].append(workout)
+                }else
+                
+                if workout.workoutDay == "Saturday" {
+                    
+                    self.workoutTwoDimentions[5].append(workout)
+                }
+                else
+                if workout.workoutDay == "Sunday" {
+                    
+                    self.workoutTwoDimentions[6].append(workout)
+                    
+                }
+                // }
                 
                 //self.arrays()
                 self.tableView.reloadData()
-
+                
                 
             }
         }
@@ -119,6 +119,12 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let cell = tableView.cellForRow(at: indexPath) as!  daysCell
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor.black.cgColor
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -127,29 +133,73 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-         print("count in section \(section) is \(workoutTwoDimentions[section].count)")
-
-        return workoutTwoDimentions[section].count
-      
+        print("count in section \(section) is \(workoutTwoDimentions[section].count)")
+        if workoutTwoDimentions[section].count == 0{
+             return 1
+            
+        }else{
+            return workoutTwoDimentions[section].count
+        }
+        
+        
         
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell         {
         //let exercise = self.workoutArray![indexPath.row]
-        let workout = self.workoutTwoDimentions[indexPath.section][indexPath.row]
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! daysCell
+
         
-        
-        cell.lable.text = workout.workoutName
-        let b  = workout.has as! Set<Exercise>
-        if b.count != 0 {
-            for i in b{
-                cell.label2.text = i.exerciseName ?? "No exercise"
-                //print(i.exerciseName ?? "NON")
+        if self.workoutTwoDimentions[indexPath.section].isEmpty {
+            
+            cell.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            cell.layer.shadowColor = UIColor.gray.cgColor
+            cell.layer.shadowOpacity = 2.0
+            cell.layer.cornerRadius = 10.0
+            cell.layer.shadowRadius = 4.0
+            //cell.layer.borderWidth = 0.1
+            cell.layer.masksToBounds = false
+            cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius:corner).cgPath
+            cell.isSelected = false
+            
+            cell.lable.text = "No Workouts Available"
+            cell.exerciseName.text = "No exercise"
+            cell.exerciseReps.text = " available to display w"
+            cell.exerciseSets.text = ""
+            
+            
+            
+        }
+        else
+        {
+            let workout = self.workoutTwoDimentions[indexPath.section][indexPath.row]
+            
+            cell.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            cell.layer.shadowColor = UIColor.gray.cgColor
+            cell.layer.shadowOpacity = 2.0
+            cell.layer.cornerRadius = 10.0
+            cell.layer.shadowRadius = 4.0
+            //cell.layer.borderWidth = 0.1
+            cell.layer.masksToBounds = false
+            cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius:corner).cgPath
+            cell.isSelected = false
+            //print(workout.workoutName)
+            
+            cell.lable.text = workout.workoutName
+            let exercisesArray  = workout.has as! Set<Exercise>
+            if exercisesArray.count != 0 {
+                for i in exercisesArray {
+                    cell.exerciseName.text = i.exerciseName ?? "No exercise"
+                    cell.exerciseReps.text = String(String(i.exerciseRep) + " Reps")
+                    cell.exerciseSets.text = String(String(i.exerciseSet) + " Sets")
+                    //print(i.exerciseName ?? "NON")
+                }
             }
         }
-        //cell.label2.text = workout.has
+        
         
         return cell
     }
@@ -191,13 +241,13 @@ class WorkoutOverview: UIViewController,UITableViewDelegate, UITableViewDataSour
             view.frame =  CGRect(x: 10, y: 0, width: 0, height: 22)
         }
         
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 4
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.frame.size.width, height: 22))
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = days[section].description
-        label.textColor = .white
+        label.textColor = .gray
         view.addSubview(label)
-        view.backgroundColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1)// Set
+        //view.backgroundColor = UIColor.init(red: 103/255, green: 123/255, blue: 249/255, alpha: 1)// Set
         
         return view
     }
